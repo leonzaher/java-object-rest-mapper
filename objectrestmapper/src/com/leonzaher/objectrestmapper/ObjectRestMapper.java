@@ -25,20 +25,23 @@ public class ObjectRestMapper<T extends Object> {
 
         StringBuilder result = new StringBuilder("?");
 
-        for (int i = 0; i < fields.size(); i++) {
-            result.append(parseField(fields.get(i), obj, i == 0));
+        for (Field field : fields) {
+            result.append(parseField(field, obj));
         }
 
         if (result.toString().equals("?"))
             return "";
 
+        if (result.toString().endsWith("&"))
+            return result.toString().substring(0, result.length() - 1);
+
         return result.toString();
     }
 
-    private String parseField(Field field, T obj, Boolean appendAnd) throws IllegalAccessException {
+    private String parseField(Field field, T obj) throws IllegalAccessException {
         field.setAccessible(true);
 
-        return appendAnd ? field.getName() + "=" + field.get(obj) : "&" + field.getName() + "=" + field.get(obj);
+        return field.getName() + "=" + field.get(obj) + "&";
     }
 
     private List<Field> getFields(T obj) {

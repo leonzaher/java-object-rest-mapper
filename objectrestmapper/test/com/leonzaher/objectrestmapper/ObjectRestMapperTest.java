@@ -80,4 +80,38 @@ public class ObjectRestMapperTest {
         //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
         //assertEquals("Headers 1 - null", result1, mapper1Hea.convertToParams(obj));
     }
+
+    @Test
+    public void convertNested() throws Exception {
+        class Nested {
+            public String occupation = "programmer";
+            Byte byyte = 11;
+
+            @Override
+            public String toString() {
+                return occupation + byyte;
+            }
+        }
+
+        class TestObj {
+            public String first = "Hello world";
+
+            protected String howareyou = "fine";
+
+            private Short number2 = 155;
+
+            Nested nested = new Nested();
+        }
+
+        TestObj obj = new TestObj();
+
+
+        String result1 = "?first=Hello world&howareyou=fine&number2=155&nested=programmer11";
+
+        ObjectRestMapper mapper1Par = new ObjectRestMapper(AccessLevel.ALL);
+        assertEquals("Parameters 1 - nested", result1, mapper1Par.convertToParams(obj));
+
+        //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //assertEquals("Headers 1 - null", result1, mapper1Hea.convertToParams(obj));
+    }
 }
