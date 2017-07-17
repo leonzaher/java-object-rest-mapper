@@ -2,12 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.leonzaher.objectrestmapper</groupId>
-    <artifactId>objectrestmapper</artifactId>
+    <groupId>com.leonzaher.objecthttpmapper</groupId>
+    <artifactId>objecthttpmapper</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>objectrestmapper</name>
+    <name>objecthttpmapper</name>
+    <description>Mapper used for mapping Java objects to HTTP headers or parameters</description>
 
     <properties>
 

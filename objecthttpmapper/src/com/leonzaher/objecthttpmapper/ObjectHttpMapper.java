@@ -1,15 +1,15 @@
-package com.leonzaher.objectrestmapper;
+package com.leonzaher.objecthttpmapper;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ObjectRestMapper<T extends Object> {
+public class ObjectHttpMapper<T extends Object> {
 
     private AccessLevel accessLevel;
 
     private List<String> fieldExclusions;
 
-    public ObjectRestMapper(AccessLevel accessLevel, String... fieldExclusions) {
+    public ObjectHttpMapper(AccessLevel accessLevel, String... fieldExclusions) {
         this.accessLevel = accessLevel;
 
         this.fieldExclusions = Arrays.asList(fieldExclusions);

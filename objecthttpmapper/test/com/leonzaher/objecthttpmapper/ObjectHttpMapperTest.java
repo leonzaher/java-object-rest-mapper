@@ -1,9 +1,9 @@
-package com.leonzaher.objectrestmapper;
+package com.leonzaher.objecthttpmapper;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ObjectRestMapperTest {
+public class ObjectHttpMapperTest {
 
     @Test
     public void convertToParams() throws Exception {
@@ -26,27 +26,27 @@ public class ObjectRestMapperTest {
 
 
         String result1 = "?first=Hello world&occupation=programmer&number=4&howareyou=fine&linux=true&byyte=11&number2=155&john=john";
-        ObjectRestMapper mapper1 = new ObjectRestMapper(AccessLevel.ALL);
+        ObjectHttpMapper mapper1 = new ObjectHttpMapper(AccessLevel.ALL);
         assertEquals("Parameters 1 - Access level ALL, excluded 0", result1, mapper1.convertToParams(obj));
 
         String result2 = "?first=Hello world&occupation=programmer&number=4";
-        ObjectRestMapper mapper2 = new ObjectRestMapper(AccessLevel.PUBLIC);
+        ObjectHttpMapper mapper2 = new ObjectHttpMapper(AccessLevel.PUBLIC);
         assertEquals("Parameters 2 - Access level PUBLIC, excluded 0", result2, mapper2.convertToParams(obj));
 
         String result3 = "?howareyou=fine&linux=true&byyte=11&number2=155&john=john";
-        ObjectRestMapper mapper3 = new ObjectRestMapper(AccessLevel.NOT_PUBLIC);
+        ObjectHttpMapper mapper3 = new ObjectHttpMapper(AccessLevel.NOT_PUBLIC);
         assertEquals("Parameters 3 - Access level NOT_PUBLIC, excluded 0", result3, mapper3.convertToParams(obj));
 
         String result4 = "?first=Hello world&number=4";
-        ObjectRestMapper mapper4 = new ObjectRestMapper(AccessLevel.PUBLIC, "occupation", "byyte", "john");
+        ObjectHttpMapper mapper4 = new ObjectHttpMapper(AccessLevel.PUBLIC, "occupation", "byyte", "john");
         assertEquals("Parameters 4 - Access level PUBLIC, excluded 3", result4, mapper4.convertToParams(obj));
 
         String result5 = "?howareyou=fine&linux=true&number2=155";
-        ObjectRestMapper mapper5 = new ObjectRestMapper(AccessLevel.NOT_PUBLIC, "occupation", "byyte", "john");
+        ObjectHttpMapper mapper5 = new ObjectHttpMapper(AccessLevel.NOT_PUBLIC, "occupation", "byyte", "john");
         assertEquals("Parameters 5 - Access level NOT_PUBLIC, excluded 3", result5, mapper5.convertToParams(obj));
 
         String result6 = "";
-        ObjectRestMapper mapper6 = new ObjectRestMapper(AccessLevel.PUBLIC, "first", "occupation", "number");
+        ObjectHttpMapper mapper6 = new ObjectHttpMapper(AccessLevel.PUBLIC, "first", "occupation", "number");
         assertEquals("Parameters 6 - Access level PUBLIC, excluded 3", result6, mapper6.convertToParams(obj));
     }
 
@@ -59,10 +59,10 @@ public class ObjectRestMapperTest {
 
         String result1 = "";
 
-        ObjectRestMapper mapper1Par = new ObjectRestMapper(AccessLevel.ALL);
+        ObjectHttpMapper mapper1Par = new ObjectHttpMapper(AccessLevel.ALL);
         assertEquals("Parameters 1 - empty", result1, mapper1Par.convertToParams(obj));
 
-        //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //ObjectHttpMapper mapper1Hea = new ObjectHttpMapper(AccessLevel.ALL);
         //assertEquals("Headers 1 - empty", result1, mapper1Hea.convertToParams(obj));
     }
 
@@ -75,10 +75,10 @@ public class ObjectRestMapperTest {
 
         String result1 = "";
 
-        ObjectRestMapper mapper1Par = new ObjectRestMapper(AccessLevel.ALL);
+        ObjectHttpMapper mapper1Par = new ObjectHttpMapper(AccessLevel.ALL);
         assertEquals("Parameters 1 - null", result1, mapper1Par.convertToParams(obj));
 
-        //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //ObjectHttpMapper mapper1Hea = new ObjectHttpMapper(AccessLevel.ALL);
         //assertEquals("Headers 1 - null", result1, mapper1Hea.convertToParams(obj));
     }
 
@@ -109,10 +109,10 @@ public class ObjectRestMapperTest {
 
         String result1 = "?first=Hello world&howareyou=fine&number2=155&nested=programmer11";
 
-        ObjectRestMapper mapper1Par = new ObjectRestMapper(AccessLevel.ALL);
+        ObjectHttpMapper mapper1Par = new ObjectHttpMapper(AccessLevel.ALL);
         assertEquals("Parameters 1 - nested", result1, mapper1Par.convertToParams(obj));
 
-        //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //ObjectHttpMapper mapper1Hea = new ObjectHttpMapper(AccessLevel.ALL);
         //assertEquals("Headers 1 - null", result1, mapper1Hea.convertToParams(obj));
     }
 
@@ -131,10 +131,10 @@ public class ObjectRestMapperTest {
 
         String result1 = "";
 
-        ObjectRestMapper mapper1Par = new ObjectRestMapper(AccessLevel.ALL);
+        ObjectHttpMapper mapper1Par = new ObjectHttpMapper(AccessLevel.ALL);
         assertEquals("Parameters 1 - containing nulls", result1, mapper1Par.convertToParams(obj));
 
-        //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //ObjectHttpMapper mapper1Hea = new ObjectHttpMapper(AccessLevel.ALL);
         //assertEquals("Headers 1 - containing nulls", result1, mapper1Hea.convertToParams(obj));
 
 
@@ -142,10 +142,10 @@ public class ObjectRestMapperTest {
 
         String result2 = "?id=1234";
 
-        ObjectRestMapper mapper2Par = new ObjectRestMapper(AccessLevel.ALL);
+        ObjectHttpMapper mapper2Par = new ObjectHttpMapper(AccessLevel.ALL);
         assertEquals("Parameters 2 - containing nulls", result2, mapper2Par.convertToParams(obj));
 
-        //ObjectRestMapper mapper2Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //ObjectHttpMapper mapper2Hea = new ObjectHttpMapper(AccessLevel.ALL);
         //assertEquals("Headers 2 - containing nulls", result2, mapper2Hea.convertToParams(obj));
     }
 }
