@@ -16,6 +16,7 @@ public class ObjectRestMapperTest {
             protected boolean linux = true;
 
             Byte byyte = 11;
+            String id = null;
 
             private Short number2 = 155;
             private String john = "john";
@@ -113,5 +114,38 @@ public class ObjectRestMapperTest {
 
         //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
         //assertEquals("Headers 1 - null", result1, mapper1Hea.convertToParams(obj));
+    }
+
+    @Test
+    public void convertContainingNulls() throws Exception {
+        class TestObj {
+            public String first = null;
+
+            protected String id = null;
+
+            private Short number2 = null;
+        }
+
+        TestObj obj = new TestObj();
+
+
+        String result1 = "";
+
+        ObjectRestMapper mapper1Par = new ObjectRestMapper(AccessLevel.ALL);
+        assertEquals("Parameters 1 - containing nulls", result1, mapper1Par.convertToParams(obj));
+
+        //ObjectRestMapper mapper1Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //assertEquals("Headers 1 - containing nulls", result1, mapper1Hea.convertToParams(obj));
+
+
+        obj.id = "1234";
+
+        String result2 = "?id=1234";
+
+        ObjectRestMapper mapper2Par = new ObjectRestMapper(AccessLevel.ALL);
+        assertEquals("Parameters 2 - containing nulls", result2, mapper2Par.convertToParams(obj));
+
+        //ObjectRestMapper mapper2Hea = new ObjectRestMapper(AccessLevel.ALL);
+        //assertEquals("Headers 2 - containing nulls", result2, mapper2Hea.convertToParams(obj));
     }
 }

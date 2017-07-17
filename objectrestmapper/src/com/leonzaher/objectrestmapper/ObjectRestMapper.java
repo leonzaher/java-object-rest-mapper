@@ -1,9 +1,7 @@
 package com.leonzaher.objectrestmapper;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ObjectRestMapper<T extends Object> {
 
@@ -26,7 +24,10 @@ public class ObjectRestMapper<T extends Object> {
         StringBuilder result = new StringBuilder("?");
 
         for (Field field : fields) {
-            result.append(parseField(field, obj));
+            String parsed = parseField(field, obj);
+
+            if (parsed != null)
+                result.append(parsed);
         }
 
         if (result.toString().equals("?"))
@@ -40,6 +41,9 @@ public class ObjectRestMapper<T extends Object> {
 
     private String parseField(Field field, T obj) throws IllegalAccessException {
         field.setAccessible(true);
+
+        if (field.get(obj) == null)
+            return null;
 
         return field.getName() + "=" + field.get(obj) + "&";
     }
